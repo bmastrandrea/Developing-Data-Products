@@ -1,0 +1,39 @@
+---
+title: "R Markdown and Leaflet Peer-graded Assignment"
+author: "Barbara Mastrandrea"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Date: "14/3/2017"
+
+```{r}
+library(leaflet)
+```
+
+```{r}
+ l <- leaflet() %>% setView(lat = 45.4641, lng = 9.1919, zoom = 14) %>%
+ 	addTiles() %>%
+	addEasyButtonBar(
+   		easyButton(
+   		 icon="fa-globe", title="Zoom to Level 1",
+   		 onClick=JS("function(btn, map){ map.setZoom(1); }")),
+   		easyButton(
+	     icon="fa-crosshairs", title="Locate Me",
+	     onClick = JS("function(btn, map){ map.locate({setView: true}); }"))) %>%
+    addCircleMarkers(lat = 45.4641, lng = 9.1919 ,  popup="Milano Duomo di Milano") %>%
+    addMarkers(lat=45.4658, lng=9.1899 ,  popup="Milano Glleria Vittorio Emanuele") %>%
+    addMarkers(lat=45.4674, lng=9.1896 ,  popup="Milano Teatro alla Scala") %>%
+    addMarkers(lat=45.4623, lng=9.1756 ,  popup="Milano Basilica di Sant'Ambrogio") %>%    
+    addMarkers(lat=45.4705, lng=9.1793 ,  popup="Milano Castello Sforza") %>%
+    addCircles(lat = 45.4641, lng = 9.1919 , fillColor = "transparent", radius=1700 )
+ l %>%
+     addProviderTiles(providers$Esri.WorldStreetMap) %>%
+     addMiniMap()   
+```
+
